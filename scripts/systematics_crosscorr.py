@@ -18,9 +18,9 @@ def assign_systematics_weights(catalog, ratag = 'ra', dectag = 'dec', z_tag = 'z
     zbins_hi = np.array([0.35, 0.50, 0.65, 0.80, 0.90])
     zbins_lo = np.array([0.15, 0.35, 0.50, 0.65, 0.80])
     weights = np.zeros_like(catalog[ratag])
-    map_filenames = ['w_map_bin0_nside4096_nbins1d_10_2.0sig.fits','w_map_bin1_nside4096_nbins1d_10_2.0sig.fits',
-                     'w_map_bin2_nside4096_nbins1d_10_2.0sig.fits','w_map_bin3_nside4096_nbins1d_10_2.0sig.fits',
-                     'w_map_bin4_nside4096_nbins1d_10_2.0sig.fits']
+    map_filenames = ['../data/w_map_bin0_nside4096_nbins1d_10_2.0sig.fits','../data/w_map_bin1_nside4096_nbins1d_10_2.0sig.fits',
+                     '../data/w_map_bin2_nside4096_nbins1d_10_2.0sig.fits','../data/w_map_bin3_nside4096_nbins1d_10_2.0sig.fits',
+                     '../data/w_map_bin4_nside4096_nbins1d_10_2.0sig.fits']
     
     map_files = [os.path.join(map_path,ifile) for ifile in map_filenames]
     hpInds = hpRaDecToHEALPixel(catalog[ratag],catalog[dectag],nside=nside,nest=nest)
