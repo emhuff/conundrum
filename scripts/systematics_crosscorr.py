@@ -34,7 +34,7 @@ def assign_systematics_weights(catalog, ratag = 'ra', dectag = 'dec', z_tag = 'z
 
 
 def get_catalogs(zmin=0,zmax=10, weights = True, jacknife = True):
-    blg_datafile = "redmagic_lens_v0.5.1_wide_balrog_merged_v1.4_masked.fits"
+    blg_datafile = "../data/redmagic_lens_v0.5.1_wide_balrog_merged_v1.4_masked.fits"
     blg_data = fitsio.read(blg_datafile)
     blg_data = blg_data[( blg_data['zredmagic'] > zmin ) & (blg_data['zredmagic'] <= zmax)]
     if weights:
@@ -42,13 +42,13 @@ def get_catalogs(zmin=0,zmax=10, weights = True, jacknife = True):
         blg_datacat = treecorr.Catalog(ra = blg_data['meas_ra'], dec = blg_data['meas_dec'], ra_units = 'deg', dec_units = 'deg', w = blg_wts, npatch = 50)
     else:
         blg_datacat = treecorr.Catalog(ra = blg_data['meas_ra'], dec = blg_data['meas_dec'], ra_units = 'deg', dec_units = 'deg', npatch = 50)
-    blg_ranfile = "randoms_detection_balrog_merged_v1.4_masked_removedbadtile.fits"
+    blg_ranfile = "../data/randoms_detection_balrog_merged_v1.4_masked_removedbadtile.fits"
     blg_rancat = treecorr.Catalog(blg_ranfile, ra_col='RA', dec_col= 'DEC',ra_units='deg', dec_units='deg', patch_centers = blg_datacat.patch_centers)
   
         
-    rm_randfile = "y3_redmagic_combined_sample_fid_x40_1_randoms.fits"
+    rm_randfile = "../data/y3_redmagic_combined_sample_fid_x40_1_randoms.fits"
     rm_rancat = treecorr.Catalog(rm_randfile,ra_col = 'RA', dec_col = 'DEC', ra_units='deg', dec_units='deg', patch_centers = blg_datacat.patch_centers)
-    rm_datafile = "y3_gold_2.2.1_wide_sofcol_run_redmapper_v0.5.1_combined_hd3_hl2_sample_weighted2.0sig.fits"
+    rm_datafile = "../data/y3_gold_2.2.1_wide_sofcol_run_redmapper_v0.5.1_combined_hd3_hl2_sample_weighted2.0sig.fits"
     rm_data = fitsio.read(rm_datafile)
     rm_data = rm_data[( rm_data['ZREDMAGIC'] > zmin) & (rm_data['ZREDMAGIC'] <= zmax)]
     if weights:
@@ -99,7 +99,7 @@ def main():
         plt.xlabel('angle (arcmin)')
         plt.ylabel('theta * BxRM')
         plt.tight_layout()
-        plt.savefig(f'balrog_redmagic_crosscorr-{zlo:.03}_{zhi:03}.png')
+        plt.savefig(f'./plots/balrog_redmagic_crosscorr-{zlo:.03}_{zhi:03}.png')
         plt.clf()
     ipdb.set_trace()
 
